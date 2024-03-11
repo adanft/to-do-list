@@ -1,33 +1,179 @@
+@import url(https://www.nerdfonts.com/assets/css/webfont.css);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	--primary-color: #6747c8;
+	--select-color: #21b9ff;
+	--bg-primary: #ffffff;
+	--bg-secondary: #ffffff;
+	--border-color: #f0eff5;
+	--shadow-color: #9d99aa42;
+	--muted-color: #aaabb7;
+	--title-color: #2f1c6b;
+	--text-color: #111111;
+	--bg-hover-scroll: #9798a7;
+	--bg-scroll: #e5e4ec;
+
+	--box-shadow: 0 0 16px;
+	--border-radius: 6px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.dark {
+	--bg-primary: #19171d;
+	--bg-secondary: #25232b;
+	--border-color: #231e2c;
+	--shadow-color: #322f3b42;
+	--muted-color: #686a77;
+	--title-color: #6747c8;
+	--text-color: #cccccc;
+	--bg-hover-scroll: #5c5e6b;
+	--bg-scroll: #25232b;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+	.bg-primary {
+		background-color: var(--bg-primary);
+	}
+
+	.bg-secondary {
+		background-color: var(--bg-secondary);
+	}
+
+	.bg-primary-color {
+		background-color: var(--primary-color);
+	}
+
+	.text-primary {
+		color: var(--primary-color);
+	}
+
+	.text-muted {
+		color: var(--muted-color);
+	}
+
+	.text-title {
+		color: var(--title-color);
+	}
+
+	.text-color {
+		color: var(--text-color);
+	}
+
+	.text-base-color {
+		color: #cccccc;
+	}
+
+	.box {
+		background-color: var(--bg-secondary);
+		box-shadow: var(--box-shadow) var(--shadow-color);
+		border: 1px solid var(--border-color);
+		border-radius: var(--border-radius);
+	}
+
+	.box-border-shadow {
+		box-shadow: var(--box-shadow) var(--shadow-color);
+		border: 1px solid var(--border-color);
+	}
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.active {
+	color: var(--primary-color);
+}
+
+.scroll::-webkit-scrollbar {
+	width: 10px;
+}
+
+.scroll:hover::-webkit-scrollbar-thumb {
+	background: var(--muted-color);
+	border-radius: 6px;
+}
+
+.scroll:hover::-webkit-scrollbar-thumb:hover {
+	background: var(--bg-hover-scroll);
+}
+
+.scroll:hover::-webkit-scrollbar-thumb:active {
+	background-color: var(--primary-color);
+}
+
+.scroll:hover::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.scroll:hover::-webkit-scrollbar-track:hover,
+.scroll:hover::-webkit-scrollbar-track:active {
+	background: transparent;
+}
+
+/* Scroll */
+
+.main-scroll::-webkit-scrollbar {
+	width: 10px;
+}
+
+.main-scroll::-webkit-scrollbar-thumb {
+	background: var(--muted-color);
+	border-radius: 6px;
+}
+
+.main-scroll::-webkit-scrollbar-thumb:hover {
+	background: var(--bg-hover-scroll);
+}
+
+.main-scroll::-webkit-scrollbar-thumb:active {
+	background-color: var(--primary-color);
+}
+
+.main-scroll::-webkit-scrollbar-track {
+	background: var(--bg-scroll);
+}
+
+.main-scroll::-webkit-scrollbar-track:hover,
+.main-scroll::-webkit-scrollbar-track:active {
+	background: var(--bg-scroll);
+}
+
+/* Modify Date Picker external library styles */
+
+.select-day-picker:not([disabled]) {
+	background-color: var(--primary-color) !important;
+	color: white !important;
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+	background-color: var(--select-color) !important;
+	color: white !important;
+}
+
+.select-today-picker {
+	font-weight: 700 !important;
+	color: var(--primary-color) !important;
+}
+
+.rdp {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+/* Finish modify Date Picker external library styles */
+
+/* Tooltip */
+
+.tooltip-container:hover .tooltip-content {
+	display: flex;
+}
+
+.tooltip-content::after {
+	content: '';
+	position: absolute;
+	right: -20px;
+	top: 50%;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent transparent transparent var(--primary-color);
+	transform: translateY(-50%);
 }

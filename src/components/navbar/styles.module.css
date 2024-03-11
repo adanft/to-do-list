@@ -1,0 +1,6 @@
+.shadowBottom {
+	border-bottom: 1px;
+	border-color: var(--border-color);
+	border-style: solid;
+	box-shadow: var(--box-shadow) var(--shadow-color);
+}
