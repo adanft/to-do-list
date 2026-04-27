@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 function Button(props: PropsType) {
 	const { className, content, icon, buttonType, linkHref } = props;
@@ -24,7 +25,7 @@ function Button(props: PropsType) {
 type PropsType = {
 	className: string;
 	content: string;
-	icon: JSX.Element | '' | undefined;
+	icon: ReactNode;
 	buttonType: undefined | 'button' | 'submit' | 'reset';
 	linkHref: string | undefined;
 };

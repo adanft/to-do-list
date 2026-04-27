@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 
 function useOutside(action: () => void) {
-	const ref = useRef<HTMLElement>();
+	const ref = useRef<HTMLElement | null>(null);
 	useEffect(() => {
 		const eventAction = (event: MouseEvent) => {
-			if (ref.current !== undefined && !ref.current.contains(event.target as Node)) {
+			if (ref.current !== null && !ref.current.contains(event.target as Node)) {
 				action();
 			}
 		};
@@ -13,7 +13,7 @@ function useOutside(action: () => void) {
 		return () => {
 			document.removeEventListener('mousedown', eventAction, true);
 		};
-	}, [action, ref]);
+	}, [action]);
 
 	return ref;
 }

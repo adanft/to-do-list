@@ -1,4 +1,4 @@
-import { type ThemeType } from '@/types/theme';
+import type { ThemeType } from '@/types/theme';
 
 export function getTheme(): ThemeType | null {
 	if (typeof window === 'undefined') return null;

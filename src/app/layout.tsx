@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import ThemeProvider from './store/provider/theme-provider';
 import Navbar from '@/components/navbar';
 import { TaskDataProvider } from './store/provider/task-provider';
+import ThemeProvider from './store/provider/theme-provider';
 
 const inter = Poppins({
 	weight: ['400', '500', '600', '700'],
 	style: ['normal'],
 	subsets: ['latin'],
+	display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en">
-			<body className={`${inter.className} overflow-hidden`}>
+			<body className={`${inter.className}`}>
 				<ThemeProvider>
 					<TaskDataProvider>
 						<Navbar />

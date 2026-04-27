@@ -1,11 +1,11 @@
 'use client';
 
+import { type FormEvent, useState } from 'react';
+import { DayPicker } from 'react-day-picker';
 import { useTask } from '@/app/store/provider/task-provider';
 import Button from '@/components/button';
 import useForm from '@/hooks/use-form';
-import { TaskType } from '@/types/task';
-import React, { FormEvent, useState } from 'react';
-import { DayPicker } from 'react-day-picker';
+import type { TaskType } from '@/types/task';
 import 'react-day-picker/dist/style.css';
 import { useRouter } from 'next/navigation';
 
@@ -25,8 +25,9 @@ function TaskForm(props: PropsType) {
 
 	const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		if (day === undefined) return;
 
-		const newTak = { ...task, date: day!.toISOString(), id: task.id };
+		const newTak = { ...task, date: day.toISOString(), id: task.id };
 
 		actions.onUpdateTask(newTak);
 		router.push('/');
@@ -34,8 +35,9 @@ function TaskForm(props: PropsType) {
 
 	const handleCreate = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		if (day === undefined) return;
 
-		const newTak = { ...task, date: day!.toISOString(), id: task.title.replace(/\s/g, '') };
+		const newTak = { ...task, date: day.toISOString(), id: crypto.randomUUID() };
 
 		actions.onCreateTask(newTak);
 		router.push('/');

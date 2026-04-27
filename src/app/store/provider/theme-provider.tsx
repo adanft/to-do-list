@@ -1,32 +1,49 @@
 'use client';
 
-import { type ChildrenNodeType } from '@/types/children-node';
-import React, { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '../states/theme-context';
-import { type ThemeContextType } from '@/types/theme-context';
-import { type ThemeType } from '@/types/theme';
+import { type ReactElement, useContext, useSyncExternalStore } from 'react';
 import { getTheme } from '@/helpers/setTheme';
+import type { ChildrenNodeType } from '@/types/children-node';
+import type { ThemeType } from '@/types/theme';
+import type { ThemeContextType } from '@/types/theme-context';
+import { ThemeContext } from '../states/theme-context';
 
-function ThemeProvider({ children }: ChildrenNodeType): JSX.Element | null {
-	const [mounted, setMounted] = useState(false);
-	const [theme, setTheme] = useState<ThemeType | null>(getTheme);
+const THEME_CHANGE_EVENT = 'theme-change';
+
+function getThemeSnapshot(): ThemeType {
+	return getTheme() ?? 'light';
+}
+
+function getServerThemeSnapshot(): ThemeType {
+	return 'light';
+}
+
+function subscribeToThemeChange(callback: () => void): () => void {
+	window.addEventListener('storage', callback);
+	window.addEventListener(THEME_CHANGE_EVENT, callback);
+
+	return () => {
+		window.removeEventListener('storage', callback);
+		window.removeEventListener(THEME_CHANGE_EVENT, callback);
+	};
+}
+
+function ThemeProvider({ children }: ChildrenNodeType): ReactElement {
+	const theme = useSyncExternalStore(
+		subscribeToThemeChange,
+		getThemeSnapshot,
+		getServerThemeSnapshot,
+	);
 
 	const toggle = (): void => {
 		const themeColor = theme === 'light' ? 'dark' : 'light';
 
-		setTheme(themeColor);
 		localStorage.setItem('theme', themeColor);
+		window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
 	};
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	if (!mounted) return null;
 
 	return (
 		<ThemeContext.Provider value={{ theme, toggle }}>
-			<div className={`${theme ?? 'light'} w-full min-h-screen bg-primary`}>{children}</div>
+			<div className={`${theme} w-full min-h-screen bg-primary`}>{children}</div>
 		</ThemeContext.Provider>
 	);
 }

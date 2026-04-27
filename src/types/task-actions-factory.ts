@@ -1,5 +1,5 @@
-import { type Dispatch, type SetStateAction } from 'react';
-import { TaskType } from './task';
+import type { Dispatch, SetStateAction } from 'react';
+import type { TaskType } from './task';
 
 export type TaskActionsFactoryType = {
 	onGetTasks: () => void;

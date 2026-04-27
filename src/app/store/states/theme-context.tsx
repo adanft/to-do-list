@@ -1,5 +1,5 @@
-import { type ThemeContextType } from '@/types/theme-context';
 import { createContext } from 'react';
+import type { ThemeContextType } from '@/types/theme-context';
 
 const themeContextInitialState: ThemeContextType = {
 	theme: null,

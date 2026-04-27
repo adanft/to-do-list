@@ -1,22 +1,22 @@
 'use client';
 
-import { useTask } from '@/app/store/provider/task-provider';
-import { TaskType } from '@/types/task';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
+import { useTask } from '@/app/store/provider/task-provider';
+import type { TaskType } from '@/types/task';
 import 'react-day-picker/dist/style.css';
+import { useParams } from 'next/navigation';
 
-type PropsType = {
-	params: { id: string };
-};
-
-function InfoTask(props: PropsType) {
+function InfoTask() {
 	const [, actions] = useTask();
 	const [task, setTask] = useState<TaskType>();
+	const [loaded, setLoaded] = useState(false);
+	const params = useParams<{ id: string }>();
 
 	useEffect(() => {
-		actions.onGetTask(props.params.id, setTask);
-	}, [actions, props.params.id]);
+		actions.onGetTask(decodeURIComponent(params.id), setTask);
+		setLoaded(true);
+	}, [actions, params.id]);
 
 	return (
 		<>
@@ -38,6 +38,8 @@ function InfoTask(props: PropsType) {
 						/>
 					</div>
 				</div>
+			) : loaded ? (
+				<div className="box p-4 max-w-screen-md mx-auto text-center">Task not found.</div>
 			) : (
 				'Loading...'
 			)}

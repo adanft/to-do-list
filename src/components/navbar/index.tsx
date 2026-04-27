@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import type { ReactElement } from 'react';
 import Toggle from '../toggle';
 import styles from './styles.module.css';
 
-function Navbar(): JSX.Element {
+function Navbar(): ReactElement {
 	return (
 		<div
 			className={`${styles.shadowBottom} fixed top-0 h-14 w-full bg-secondary px-4 text-color flex justify-between z-10`}

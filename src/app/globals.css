@@ -1,8 +1,5 @@
 @import url(https://www.nerdfonts.com/assets/css/webfont.css);
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
 	--primary-color: #6747c8;
@@ -168,7 +165,7 @@
 }
 
 .tooltip-content::after {
-	content: '';
+	content: "";
 	position: absolute;
 	right: -20px;
 	top: 50%;

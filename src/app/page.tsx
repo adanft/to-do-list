@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useTask } from './store/provider/task-provider';
-import Card from '@/components/card';
-import { TaskType } from '@/types/task';
 import Button from '@/components/button';
+import Card from '@/components/card';
+import type { TaskType } from '@/types/task';
+import { useTask } from './store/provider/task-provider';
 
 export default function Home() {
 	const [state, actions] = useTask();

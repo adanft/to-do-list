@@ -1,4 +1,4 @@
-import { TaskType } from './task';
+import type { TaskType } from './task';
 
 export type DispatchType = (dispatch: {
 	type: string;

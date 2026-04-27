@@ -11,4 +11,4 @@ function deleteData(name: string) {
 	localStorage.removeItem(name);
 }
 
-export { saveData, getData, deleteData };
+export { deleteData, getData, saveData };

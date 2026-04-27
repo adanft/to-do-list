@@ -1,10 +1,9 @@
 'use client';
-import React from 'react';
-
-import styles from './styles.module.css';
+import type { ReactElement } from 'react';
 import { useTheme } from '@/app/store/provider/theme-provider';
+import styles from './styles.module.css';
 
-function Toggle(): JSX.Element {
+function Toggle(): ReactElement {
 	const { theme, toggle } = useTheme();
 
 	function handleToggle(): void {

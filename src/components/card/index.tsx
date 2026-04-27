@@ -1,8 +1,8 @@
-import React, { LegacyRef, useState } from 'react';
-import Link from 'next/link';
-import { TaskType } from '@/types/task';
 import moment from 'moment';
+import Link from 'next/link';
+import { type LegacyRef, useState } from 'react';
 import useOutside from '@/hooks/use-outside';
+import type { TaskType } from '@/types/task';
 
 type PropsType = {
 	task: TaskType;
@@ -13,6 +13,7 @@ type PropsType = {
 function Card(props: PropsType) {
 	const { task, deleteTask, updateTask } = props;
 	const [active, setActive] = useState(false);
+	const taskHrefId = encodeURIComponent(task.id);
 
 	const asideRef = useOutside(() => {
 		setActive(false);
@@ -61,15 +62,16 @@ function Card(props: PropsType) {
 						</span>
 						<div className="hidden tooltip-content bg-primary-color p-2 rounded-md absolute flex-col gap-2 right-full top-1/2 -translate-y-1/2 z-20">
 							{getUpdateStatus(task.status)?.map((state) => (
-								<span
+								<button
+									type="button"
 									key={state}
-									className={`text-white font-semibold text-nowrap`}
+									className="text-white font-semibold text-nowrap text-left"
 									onClick={() =>
 										updateTask({ ...task, status: getStatus(state) })
 									}
 								>
 									{state}
-								</span>
+								</button>
 							))}
 						</div>
 					</div>
@@ -79,6 +81,7 @@ function Card(props: PropsType) {
 					className="md:hidden relative col-span-1 flex justify-end"
 				>
 					<button
+						type="button"
 						onClick={() => {
 							setActive(!active);
 						}}
@@ -87,13 +90,17 @@ function Card(props: PropsType) {
 					</button>
 					{active && (
 						<div className="absolute rounded-md text-2xl text-white bg-primary-color z-20 overflow-hidden flex flex-col box-border-shadow top-full right-6">
-							<Link href={`/tasks/${task.id}/update`} className="p-4 leading-4">
+							<Link href={`/tasks/${taskHrefId}/update`} className="p-4 leading-4">
 								<i className="nf nf-fa-edit" />
 							</Link>
-							<button className="p-4 leading-4" onClick={() => deleteTask(task)}>
+							<button
+								type="button"
+								className="p-4 leading-4"
+								onClick={() => deleteTask(task)}
+							>
 								<i className="nf nf-md-delete_outline" />
 							</button>
-							<Link href={`/tasks/${task.id}/info`} className="p-4 leading-4">
+							<Link href={`/tasks/${taskHrefId}/info`} className="p-4 leading-4">
 								<i className="nf nf-oct-info" />
 							</Link>
 						</div>
@@ -101,13 +108,20 @@ function Card(props: PropsType) {
 				</div>
 			</div>
 			<div className="hidden md:flex ml-1 box-border-shadow items-center justify-between bg-primary-color text-white text-2xl rounded-e-md">
-				<Link href={`/tasks/${task.id}/update`} className="p-4 leading-4 hidden md:inline">
+				<Link
+					href={`/tasks/${taskHrefId}/update`}
+					className="p-4 leading-4 hidden md:inline"
+				>
 					<i className="nf nf-fa-edit" />
 				</Link>
-				<button className="p-4 leading-4 hidden md:inline" onClick={() => deleteTask(task)}>
+				<button
+					type="button"
+					className="p-4 leading-4 hidden md:inline"
+					onClick={() => deleteTask(task)}
+				>
 					<i className="nf nf-md-delete_outline" />
 				</button>
-				<Link href={`/tasks/${task.id}/info`} className="p-4 leading-4 hidden md:inline">
+				<Link href={`/tasks/${taskHrefId}/info`} className="p-4 leading-4 hidden md:inline">
 					<i className="nf nf-oct-info" />
 				</Link>
 			</div>

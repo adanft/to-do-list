@@ -1,9 +1,9 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { getData, saveData } from '@/helpers/localStorage';
-import { TaskType } from '@/types/task';
+import type { TaskType } from '@/types/task';
+import type { TaskActionsFactoryType } from '@/types/task-actions-factory';
+import type { DispatchType } from '@/types/task-dispatch';
 import { TaskKeys } from '../keys/task-keys';
-import { DispatchType } from '@/types/task-dispatch';
-import { TaskActionsFactoryType } from '@/types/task-actions-factory';
-import { type Dispatch, type SetStateAction } from 'react';
 
 function getTasks(dispatch: DispatchType) {
 	const tasks = getData<TaskType[]>('tasks');
@@ -54,7 +54,7 @@ function deleteTask(payload: TaskType, dispatch: DispatchType) {
 	let tasks = getData<TaskType[]>('tasks');
 
 	if (tasks != null) {
-		tasks = tasks.filter((task) => task.id != payload.id);
+		tasks = tasks.filter((task) => task.id !== payload.id);
 		dispatch({ type: TaskKeys.DeleteTask, payload });
 		saveData<TaskType[]>('tasks', tasks);
 	}

@@ -1,4 +1,4 @@
-import { TaskStateType } from '@/types/task-state';
+import type { TaskStateType } from '@/types/task-state';
 
 export const InitialTaskContextState: TaskStateType = {
 	task: null,

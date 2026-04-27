@@ -1,9 +1,9 @@
 /* eslint-disable indent */
 
 import { produce } from 'immer';
+import type { TaskType } from '@/types/task';
+import type { TaskStateType } from '@/types/task-state';
 import { TaskKeys } from '../keys/task-keys';
-import { TaskType } from '@/types/task';
-import { TaskStateType } from '@/types/task-state';
 
 function TaskReducer(
 	state: TaskStateType,
