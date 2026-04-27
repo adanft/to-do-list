@@ -13,7 +13,7 @@ function Navbar(): ReactElement {
 		>
 			<Link href="/" className="flex h-full justify-center items-center gap-4">
 				<Image src="/logo.png" width={40} height={40} alt="logo-img" />
-				<span className="font-semibold text-xl text-title">To Do</span>
+				<span className="font-semibold text-xl text-title">To Do List</span>
 			</Link>
 			<div className="flex items-center">
 				<Toggle />
