@@ -4,6 +4,10 @@ A small task management app built with **Next.js 16**, **React 19**, **TypeScrip
 
 The app stores tasks in the browser using `localStorage`, so it works as a simple local-first to-do list without a backend.
 
+## Demo
+
+[Open the live demo](https://todo-list-adanft.vercel.app/)
+
 ## Features
 
 - Create tasks with title, description, status, and date.
