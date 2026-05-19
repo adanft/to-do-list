@@ -25,6 +25,12 @@ function Card(props: PropsType) {
 		if ('DONE' === color) return 'text-emerald-500';
 	}
 
+	function getStatusHoverColor(color: string) {
+		if ('TO DO' === color) return 'hover:text-red-500';
+		if ('DOING' === color) return 'hover:text-orange-400';
+		if ('DONE' === color) return 'hover:text-emerald-500';
+	}
+
 	function getUpdateStatus(status: string): string[] {
 		if ('TO DO' === status) return ['DOING', 'DONE'];
 		if ('DOING' === status) return ['TO DO', 'DONE'];
@@ -54,7 +60,7 @@ function Card(props: PropsType) {
 						{moment(task.date).format('MMMM D, YYYY')}
 					</span>
 				</div>
-				<div className="tooltip-container cursor-pointer flex items-center text-xs sm:text-base flex-col col-span-2 lg:col-span-1 relative">
+				<div className="tooltip-container cursor-default flex items-center text-xs sm:text-base flex-col col-span-2 lg:col-span-1 relative">
 					<span className="font-medium hidden sm:inline text-title">Status</span>
 					<div>
 						<span className={`font-semibold ${getStatusColor(task.status)}`}>
@@ -65,7 +71,7 @@ function Card(props: PropsType) {
 								<button
 									type="button"
 									key={state}
-									className="text-white font-semibold text-nowrap text-left"
+									className={`text-white font-semibold text-nowrap text-left ${getStatusHoverColor(state)}`}
 									onClick={() =>
 										updateTask({ ...task, status: getStatus(state) })
 									}

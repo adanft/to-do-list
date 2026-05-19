@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.pnpm-store/
 
 # testing
 /coverage
@@ -22,6 +23,7 @@
 
 # debug
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
@@ -37,3 +39,7 @@ next-env.d.ts
 
 # code editor
 .vscode
+# Local Pi runtime state
+.atl/
+.pi/
+.pi-lens/
